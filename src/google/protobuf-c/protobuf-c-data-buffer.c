@@ -13,7 +13,7 @@
  *
  * On the other hand, this can mask over some abuses (eg stack-based
  * foreign buffer fragment bugs) so we disable it by default.
- */ 
+ */
 #define GSK_DEBUG_BUFFER_ALLOCATIONS	0
 
 #define BUFFER_RECYCLING                0
@@ -50,7 +50,7 @@
 #define PROTOBUF_C_FRAGMENT_DATA(frag)     ((uint8_t*)(((ProtobufCDataBufferFragment*)(frag))+1))
 
 /* --- ProtobufCDataBufferFragment implementation --- */
-static inline int 
+static inline int
 protobuf_c_data_buffer_fragment_avail (ProtobufCDataBufferFragment *frag)
 {
   return PROTOBUF_C_FRAGMENT_DATA_SIZE - frag->buf_start - frag->buf_length;
@@ -111,7 +111,7 @@ recycle(ProtobufCDataBufferFragment* frag,
 /* --- Global public methods --- */
 /**
  * protobuf_c_data_buffer_cleanup_recycling_bin:
- * 
+ *
  * Free unused buffer fragments.  (Normally some are
  * kept around to reduce strain on the global allocator.)
  */
@@ -131,7 +131,7 @@ protobuf_c_data_buffer_cleanup_recycling_bin ()
   G_UNLOCK (recycling_stack);
 #endif
 }
-      
+
 /* --- Public methods --- */
 /**
  * protobuf_c_data_buffer_init:
@@ -208,7 +208,7 @@ protobuf_c_data_buffer_append(ProtobufCDataBuffer    *buffer,
 }
 
 void
-protobuf_c_data_buffer_append_repeated_char (ProtobufCDataBuffer    *buffer, 
+protobuf_c_data_buffer_append_repeated_char (ProtobufCDataBuffer    *buffer,
                                  char          character,
                                  size_t        count)
 {
@@ -243,7 +243,7 @@ protobuf_c_data_buffer_append_repeated_char (ProtobufCDataBuffer    *buffer,
 
 #if 0
 void
-protobuf_c_data_buffer_append_repeated_data (ProtobufCDataBuffer    *buffer, 
+protobuf_c_data_buffer_append_repeated_data (ProtobufCDataBuffer    *buffer,
                                  gconstpointer data_to_repeat,
                                  gsize         data_length,
                                  gsize         count)
@@ -358,7 +358,7 @@ protobuf_c_data_buffer_read(ProtobufCDataBuffer    *buffer,
  * and writes it to @data.  The number of bytes actually copied
  * is returned.
  *
- * This function is just like protobuf_c_data_buffer_read() except that the 
+ * This function is just like protobuf_c_data_buffer_read() except that the
  * data is not removed from the buffer.
  *
  * returns: number of bytes copied into data.
@@ -757,7 +757,7 @@ protobuf_c_data_buffer_index_of(ProtobufCDataBuffer *buffer,
  * returns: its index in the buffer, or -1 if the string
  * is not in the buffer.
  */
-int 
+int
 protobuf_c_data_buffer_str_index_of (ProtobufCDataBuffer *buffer,
                          const char *str_to_find)
 {
@@ -1049,7 +1049,7 @@ fragment_n_str(ProtobufCDataBufferFragment   *frag,
  *
  * returns: the index of that instance, or -1 if not found.
  */
-int     
+int
 protobuf_c_data_buffer_polystr_index_of    (ProtobufCDataBuffer    *buffer,
                                 char        **strings)
 {
