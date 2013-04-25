@@ -18,25 +18,29 @@
 
 #define BUFFER_RECYCLING                0
 
-#if HAVE_PROTOBUF_C_CONFIG_H
+#ifdef HAVE_PROTOBUF_C_CONFIG_H
 #include "protobuf-c-config.h"
 #endif
 #include <sys/types.h>
-#if HAVE_SYS_UIO_H /* writev function isn't available on Windows */
+#ifdef HAVE_SYS_UIO_H /* writev function isn't available on Windows */
 #include <sys/uio.h>
 #endif
-#if HAVE_UNISTD_H
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#elif HAVE_IO_H
+#else
+#ifdef HAVE_IO_H
 #include <io.h>
 #define read    _read
 #endif
+#endif
 #include <string.h>
 #include <errno.h>
-#if HAVE_ALLOCA_H
+#ifdef HAVE_ALLOCA_H
 # include <alloca.h>
-#elif defined HAVE_MALLOC_H
+#else
+#ifdef HAVE_MALLOC_H
 # include <malloc.h>
+#endif
 #endif
 #include <stdlib.h>
 #include "protobuf-c-data-buffer.h"
@@ -556,7 +560,7 @@ errno_is_ignorable (int e)
   return e == EINTR || e == EAGAIN;
 }
 
-#if HAVE_SYS_UIO_H
+#ifdef HAVE_SYS_UIO_H
 /**
  * protobuf_c_data_buffer_writev:
  * @read_from: buffer to take data from.
@@ -603,7 +607,7 @@ protobuf_c_data_buffer_writev (ProtobufCDataBuffer       *read_from,
 }
 #endif
 
-#if HAVE_SYS_UIO_H
+#ifdef HAVE_SYS_UIO_H
 /**
  * protobuf_c_data_buffer_writev_len:
  * @read_from: buffer to take data from.
